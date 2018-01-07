@@ -1,0 +1,8 @@
+pypandoc==1.4
+recommonmark==0.4.0
+sphinx-rtd-theme==0.2.4
+Sphinx==1.6.5
+twine==1.9.1
+wheel==0.30.0
+fauxmo==0.4.0
+git+https://github.com/ddimitriou/LGWebOSRemote.git#master
