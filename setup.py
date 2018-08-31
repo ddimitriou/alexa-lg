@@ -18,7 +18,7 @@ __version__ = next(re.match(version_regex, line).group(1) for line in vlines
 setup(
     name='alexa-lg',
     version=__version__,
-    description='A sample Python project',
+    description='LG TV Controls with Alexa',
     long_description=long_description,
     url='https://github.com/ddimitriou/alexa-lg',
     author='Dimitri Dimtiriou',
@@ -28,13 +28,13 @@ setup(
         "Programming Language :: Python :: 3.6"
     ],
     keywords='fauxmo alexa lg-smart-tv',
-    packages=find_packages(where='src', exclude=['contrib', 'docs', 'tests']),
+    packages=find_packages(where='./', exclude=['contrib', 'docs', 'tests']),
     install_requires=['fauxmo', 'LGWebOSRemote'],
     extras_require={},
     python_requires=">=3.6",
     entry_points={
         'console_scripts': [
-            'alexa-lg=AlexaLG:run',
+            'AlexaLG=AlexaLG:run',
         ],
     },
 )

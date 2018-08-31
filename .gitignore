@@ -8,8 +8,10 @@ __pycache__/
 *.so
 *~
 .idea/
-venv/
+env/
 
 # due to using tox and pytest
 .tox
 .cache
+
+.DS_Store

@@ -7,7 +7,8 @@ You need at least python3.6 for this to run.
 ## Configuration
 
 ```
-python3.6 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+make env
+source $(ENV)/bin/activate
+make system_deps
+make run
 ```

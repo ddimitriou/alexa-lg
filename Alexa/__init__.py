@@ -1,4 +1,3 @@
-import logging
 import logging.handlers
 
 __author__ = 'Dimitri Dimitriou'
@@ -10,6 +9,9 @@ logging.basicConfig(
     format='%(asctime)s %(name)s:%(lineno)-8d %(levelname)-8s %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
-logger = logging.getLogger("alexalg")
+
+alexalg = logging.getLogger("alexalg")
 syslog_handler = logging.handlers.SysLogHandler()
-logger.addHandler(syslog_handler)
+alexalg.addHandler(syslog_handler)
+
+alexalg.log(1,"asdasdasd")
