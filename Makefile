@@ -1,4 +1,3 @@
-# Unit-testing, docs, etc.
 
 VIRTUALENV?=virtualenv
 ENV?=env
@@ -20,8 +19,5 @@ run: clean
 clean:
 	find . -name "*.pyc" -exec rm -rf {} \;
 	@echo "done"
-
-test: clean
-	PYTHONPATH=`pwd` APPLICATION_ENV=test $(ENV)/bin/nosetests --rednose --with-notify tests
 
 .PHONY:

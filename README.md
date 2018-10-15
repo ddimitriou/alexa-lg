@@ -6,9 +6,21 @@ You need at least python3.6 for this to run.
 
 ## Configuration
 
+Install virtualenv
+
 ```
 make env
 source $(ENV)/bin/activate
 make system_deps
+```
+
+For initial setup, you must do:
+```
+$(ENV)/bin/python3 Alexa/AlexaLG.py setup
+```
+Wait for the prompt from your LG.
+
+Then to keep running:
+```
 make run
 ```

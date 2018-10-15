@@ -2,36 +2,66 @@
 
 <https://github.com/ddimitriou/alexa-lg>.
 """
+import sys
 
-from fauxmo.protocols import SSDPServer, Fauxmo
-from fauxmo.utils import get_local_ip, module_from_file, make_udp_sock
-
+from fauxmo import fauxmo
 from LGTV.___init___ import LGTVScan, LGTVClient
+from ws4py.exc import HandshakeError
+
 from Alexa import alexalg
+from time import sleep
 
 
 class AlexaLG:
 
-    tv = {}
-    def __init__(self):
-        self.lg_scan = LGTVScan
+    def __init__(self, setup=False):
+        if setup:
+            alexalg.info('Started Setup:')
+            scan_results = LGTVScan(first_only=True)
+            if len(scan_results) == 0:
+                raise Exception('Cannot find LGTV')
+            alexalg.info(scan_results)
+            self.client = LGTVClient(scan_results['address'])
+            self.client.connect()
+            sleep(15)
+            alexalg.info('Setup complete')
+        else:
+            self.client = LGTVClient()
 
-    def run(self):
-        server = SSDPServer()
-        server.add_device(self.tv['name'], self.tv['ip_address'])
+    def on(self):
+        self.client.on()
+        return 'on'
 
-    def scan(self):
-        scan_results = self.lg_scan(first_only=True)
-        if len(scan_results) == 0:
-            raise Exception('Cannot find LGTV')
-        alexalg.info(scan_results)
-        self.tv = {
-            'name': scan_results.model,
-            'ip_address': get_local_ip()
-        }
+    def off(self):
+        self.client.connect()
+        self.client.exec_command('off', {})
+        sleep(5)
+        self.client.run_forever()
+        return 'off'
+
+    def status(self):
+        try:
+            self.client.connect()
+        except HandshakeError as e:
+            return 'off'
+
+        return 'on'
+
+    def open_netflix(self):
+        self.client.connect()
+        self.client.exec_command('startApp', {'appid': 'netflix'})
+        sleep(5)
+        self.client.run_forever()
+
+    def close_netflix(self):
+        self.client.connect()
+        self.client.exec_command('closeApp', {'appid': 'netflix'})
+        sleep(5)
+        self.client.run_forever()
 
 
 if __name__ == '__main__':
-    alexa = AlexaLG()
-    alexa.scan()
-    alexa.run()
+    if len(sys.argv) > 1:
+        # means we want to setup
+        alexa = AlexaLG(True)
+    fauxmo.main('./Alexa/config.json')

@@ -13,5 +13,3 @@ logging.basicConfig(
 alexalg = logging.getLogger("alexalg")
 syslog_handler = logging.handlers.SysLogHandler()
 alexalg.addHandler(syslog_handler)
-
-alexalg.log(1,"asdasdasd")

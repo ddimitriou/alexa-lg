@@ -1,0 +1,31 @@
+{
+  "FAUXMO": {
+    "ip_address": "auto"
+  },
+  "PLUGINS": {
+    "OnOrOff": {
+      "path": "./Alexa/OnOrOff.py",
+      "DEVICES": [
+        {
+          "name": "Television",
+          "port": 49915,
+          "on_cmd": "on",
+          "off_cmd": "off",
+          "state_cmd": "status"
+        }
+      ]
+    },
+    "Netflix": {
+      "path": "./Alexa/Netflix.py",
+      "DEVICES": [
+        {
+          "name": "Netflix",
+          "port": 49916,
+          "on_cmd": "on",
+          "off_cmd": "off",
+          "state_cmd": "status"
+        }
+      ]
+    }
+  }
+}
