@@ -1,7 +1,6 @@
 
 VIRTUALENV?=virtualenv
 ENV?=env
-TEST?=nosetests
 
 
 env:
@@ -10,7 +9,7 @@ env:
 	@echo "\n\n>> Run 'source $(ENV)/bin/activate'"
 
 system_deps:
-	pip3 install -r requirements.txt
+	PYTHONPATH=`pwd` $(ENV)/bin/pip3 install -r requirements.txt
 
 run: clean
 	@echo "\nStarting Fauxmo server\n"

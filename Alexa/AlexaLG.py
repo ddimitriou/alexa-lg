@@ -7,8 +7,6 @@ import sys
 from fauxmo import fauxmo
 from LGTV.___init___ import LGTVScan, LGTVClient
 from ws4py.exc import HandshakeError
-
-from Alexa import alexalg
 from time import sleep
 
 
@@ -16,15 +14,12 @@ class AlexaLG:
 
     def __init__(self, setup=False):
         if setup:
-            alexalg.info('Started Setup:')
             scan_results = LGTVScan(first_only=True)
             if len(scan_results) == 0:
                 raise Exception('Cannot find LGTV')
-            alexalg.info(scan_results)
             self.client = LGTVClient(scan_results['address'])
             self.client.connect()
             sleep(15)
-            alexalg.info('Setup complete')
         else:
             self.client = LGTVClient()
 
@@ -58,6 +53,19 @@ class AlexaLG:
         self.client.exec_command('closeApp', {'appid': 'netflix'})
         sleep(5)
         self.client.run_forever()
+
+    def channel_up(self):
+        self.client.connect()
+        self.client.exec_command('inputChannelUp', {})
+        sleep(5)
+        self.client.run_forever()
+
+    def channel_down(self):
+        self.client.connect()
+        self.client.exec_command('inputChannelDown', {})
+        sleep(5)
+        self.client.run_forever()
+
 
 
 if __name__ == '__main__':

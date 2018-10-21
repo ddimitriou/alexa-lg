@@ -26,6 +26,18 @@
           "state_cmd": "status"
         }
       ]
+    },
+    "Channel": {
+      "path": "./Alexa/Channel.py",
+      "DEVICES": [
+        {
+          "name": "Channel",
+          "port": 49917,
+          "on_cmd": "on",
+          "off_cmd": "off",
+          "state_cmd": "status"
+        }
+      ]
     }
   }
 }
